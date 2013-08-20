@@ -5,11 +5,15 @@ class TopicsController < ApplicationController
   end
 
   def show
-      @cat = Category.find(params[:category_id])
-      @topic = @cat.topics.find(params[:id])
+    @cat = Category.find(params[:category_id])
+    @topic = @cat.topics.find(params[:id])
   end
 
   def new
+    if !user_signed_in?
+        flash.alert = "You must be logged in to create a thread."
+        redirect_to new_user_session_path and return
+    end
     @cat = Category.find(params[:category_id])
     @topic = Topic.new
   end
