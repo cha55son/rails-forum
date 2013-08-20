@@ -2,7 +2,9 @@ SimpleForum::Application.routes.draw do
     devise_for :users
 
     resources :categories do
-        resources :topics
+        resources :topics do
+            resources :posts
+        end
     end
 
     root :to => "categories#index"

@@ -7,6 +7,15 @@
         <%= csrf_meta_tags %>
     </head>
     <body>
+        <nav class="navbar navbar-default" role="navigation">
+            <ul class="nav navbar-nav navbar-right">
+                <% if user_signed_in? %>
+                    <li><a href=""><%= current_user.email %></a></li>
+                <% else %>
+                    <li><a href="#">Signup / Register</a></li>
+                <% end %>
+            </ul>
+        </nav>
         <div class="container">
             <%= yield %>
         </div>
