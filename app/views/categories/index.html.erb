@@ -1,0 +1,25 @@
+<h1>Categories</h1>
+<ul>
+    <li><%= link_to "New Category", new_category_path %>
+</ul>
+<table class="table">
+    <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Created</th>
+        <th>Actions</th>
+    </tr>
+    <% @cats.each_with_index do |cat, index| %>
+        <tr>
+            <td><%= index + 1 %></td>
+            <td><%= link_to cat.title, category_path(cat) %></td>
+            <td><%= cat.description %></td>
+            <td><%= cat.created_at %></td>
+            <td>
+                <%= link_to "Edit", edit_category_path(cat) %>
+                <%= link_to "Delete", category_path(cat),  method: :delete, data: { confirm: "Are you sure?"  } %>
+            </td>
+        </tr>
+    <% end %>
+</table>

@@ -1,5 +1,12 @@
 SimpleForum::Application.routes.draw do
-    root :to => "home#index"
+    devise_for :users
+
+    resources :categories do
+        resources :topics
+    end
+
+    root :to => "categories#index"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

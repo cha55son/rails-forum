@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @topic.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @topic.body %>
+</p>
+<%= link_to 'Edit', [:edit, @cat, @topic] %> |
+<%= link_to 'Back', @cat %>

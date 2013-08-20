@@ -1,4 +1,8 @@
 source 'https://rubygems.org'
+
+gem 'anjlab-bootstrap-rails',   :require => 'bootstrap-rails',
+                                :github => 'anjlab/bootstrap-rails',
+                                :branch => '3.0.0'
 gem 'devise'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
