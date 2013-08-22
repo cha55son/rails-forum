@@ -7,13 +7,12 @@ class TopicsController < ApplicationController
   def show
     @cat = Category.find(params[:category_id])
     @topic = @cat.topics.find(params[:id])
+    @posts = @topic.posts.all
   end
 
   def new
-    if !user_signed_in?
-        flash.alert = "You must be logged in to create a thread."
-        redirect_to new_user_session_path and return
-    end
+    require_login "You must sign in to create a topic"
+
     @cat = Category.find(params[:category_id])
     @topic = Topic.new
   end
@@ -24,8 +23,11 @@ class TopicsController < ApplicationController
   end
 
   def create
+    require_login "You must sign in to create a topic"
+
     @cat = Category.find(params[:category_id])
     @topic = @cat.topics.build(topic_params)
+    @topic.user_id = current_user.id
 
     if @topic.save
         redirect_to [@cat, @topic], notice: 'Topic was successfully created.'

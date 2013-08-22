@@ -1,7 +1,26 @@
-<h1>Topic: <%= @topic.body %></h1>
+<ol class="breadcrumb">
+    <li><%= link_to "Categories", categories_path %>
+    <li><%= link_to @cat.title, @cat %>
+    <li class="active"><%= @topic.title %>
+</ol>
+<h1>Topic: <%= @topic.title %></h1>
+<ul>
+    <li><%= link_to 'Edit', [:edit, @cat, @topic] %>
+</ul>
 <p>
   <strong>Body:</strong>
   <%= @topic.body %>
 </p>
-<%= link_to 'Edit', [:edit, @cat, @topic] %> |
-<%= link_to 'Back', @cat %>
+<h2>Posts</h2>
+<ul>
+    <li><%= link_to 'New Post', [:new, @cat, @topic, :post] %>
+</ul>
+<table class="table">
+    <% @posts.each do |post| 
+        user = User.find(post.user_id) %>
+        <tr>
+            <td><%= user.display_name %></td>
+            <td><%= post.body %></td>
+        </tr>
+    <% end %>
+</table>

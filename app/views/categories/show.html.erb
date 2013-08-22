@@ -1,3 +1,7 @@
+<ol class="breadcrumb">
+    <li><%= link_to "Categories", categories_path %>
+    <li class="active"><%= @cat.title %>
+</ol>
 <h1>Category: <%= @cat.title %></h1>
 <ul>
     <li><%= link_to "All Categories", categories_path %>
@@ -26,14 +30,19 @@
         <th></th>
         <th>Title</th>
         <th>Posts</th>
+        <th>Owner</th>
         <th>Created</th>
         <th>Actions</th>
     </tr>
     <% @cat.topics.each_with_index do |topic, index| %>
         <tr>
+            <%
+                user = User.find(topic.user_id)
+            %>
             <td><%= index + 1 %></td>
             <td><%= link_to topic.title, [@cat, topic] %></td>
             <td>0</td>
+            <td><%= user.display_name %></td>
             <td><%= topic.created_at %></td>
             <td>
                 <%= link_to "Edit", [:edit, @cat, topic] %>
