@@ -1,0 +1,16 @@
+<div class="well">
+    <div class="row">
+        <div class="col-lg-3">
+            <%= link_to @user.display_name, user_path(@user) %>
+            <br />
+            <%= @topic.created_at %>
+        </div>
+        <div class="col-lg-9">
+            <%= @topic.body %>
+            <% if @topic.created_at != @topic.updated_at %>
+                <br />
+                <strong>Edited at <%= @topic.updated_at %></strong>
+            <% end %>
+        </div>
+    </div>
+</div>

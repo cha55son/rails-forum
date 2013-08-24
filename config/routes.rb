@@ -2,14 +2,16 @@ SimpleForum::Application.routes.draw do
   resources :posts
 
     devise_for :users, :controllers => { :registrations => :registrations, :confirmations => :confirmations }
-    get 'home/confirm', to: 'home#confirm', as: 'home_confirm'
-    get 'home/thanks', to: 'home#thanks', as: 'home_thanks'
+    get 'user/:id', to: 'users#show', as: 'user'
 
     resources :categories do
         resources :topics do
             resources :posts
         end
     end
+
+    get 'home/confirm', to: 'home#confirm', as: 'home_confirm'
+    get 'home/thanks', to: 'home#thanks', as: 'home_thanks'
 
     root :to => "categories#index"
 

@@ -12,6 +12,7 @@ class PostsController < ApplicationController
     end
 
     def new
+        @user = User.find(@topic.user_id)
         @post = Post.new
     end
 

@@ -8,6 +8,7 @@
     <% end %>
     <% if @is_admin %>
         <%= link_to "Edit Category", [:edit, @cat], :class => 'btn btn-default' %>
+        <%= link_to "Delete Category", @cat, method: :delete, :data => { :confirm => "Are you sure?" }, :class => 'btn btn-danger pull-right' %>
     <% end %>
 </div>
 <table class="table">
@@ -17,7 +18,6 @@
         <th>Posts</th>
         <th>Owner</th>
         <th>Created</th>
-        <th>Actions</th>
     </tr>
     <% @cat.topics.each_with_index do |topic, index| %>
         <tr>
@@ -27,17 +27,9 @@
             %>
             <td><%= index + 1 %></td>
             <td><%= link_to topic.title, [@cat, topic] %></td>
-            <td><%= Post.where("topic_id = '" + @cat.id.to_s + "'").length %></td>
-            <td><%= user.display_name %></td>
+            <td><%= Post.where("topic_id = ?", @cat.id.to_s).length %></td>
+            <td><%= link_to user.display_name, user_path(user) %></td>
             <td><%= topic.created_at %></td>
-            <td>
-                <% if @is_admin or is_owner %>
-                    <%= link_to "Edit", [:edit, @cat, topic], :class => 'btn btn-xs btn-warning' %>
-                <% end %>
-                <% if @is_admin %>
-                    <%= link_to "Delete", [@cat, topic], method: :delete, :class => 'btn btn-xs btn-danger', data: { confirm: "Are you sure?" } %>
-                <% end %>
-            </td>
         </tr>
     <% end %>
 </table>

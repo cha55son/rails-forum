@@ -9,17 +9,11 @@
 <div style="margin-bottom: 20px">
     <%= link_to 'New Post', [:new, @cat, @topic, :post], :class => 'btn btn-default' %>
     <%= link_to 'Edit Topic', [:edit, @cat, @topic], :class => 'btn btn-default' %>
+    <% if @is_admin %>
+        <%= link_to "Delete Topic", [@cat, @topic], method: :delete, :data => { :confirm => "Are you sure?" }, :class => 'btn btn-danger pull-right' %>
+    <% end %>
 </div>
-<div class="well">
-    <div class="row">
-        <div class="col-lg-3">
-            <%= @user.display_name %>
-        </div>
-        <div class="col-lg-9">
-            <%= @topic.body %>
-        </div>
-    </div>
-</div>
+<%= render 'topic_body' %>
 <table class="table">
     <% @posts.each do |post| 
         user = User.find(post.user_id) %>

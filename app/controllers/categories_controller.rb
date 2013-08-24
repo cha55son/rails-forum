@@ -30,7 +30,7 @@ class CategoriesController < ApplicationController
     def update
         @cat = Category.find(params[:id])
         if @cat.update(category_permit)
-            redirect_to category_path
+            redirect_to @cat
         else
             render 'edit'
         end
