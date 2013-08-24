@@ -53,6 +53,7 @@ class TopicsController < ApplicationController
     private
         def is_owner?
             set_cat
+            set_topic
             @is_owner = false
             if user_signed_in? and current_user.id == @topic.user_id
                 @is_owner = true

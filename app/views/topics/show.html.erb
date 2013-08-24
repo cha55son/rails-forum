@@ -6,9 +6,10 @@
 <div class="page-header">
     <h1>Topic: <%= @topic.title %></h1>
 </div>
-<ul>
-    <li><%= link_to 'Edit', [:edit, @cat, @topic] %>
-</ul>
+<div style="margin-bottom: 20px">
+    <%= link_to 'New Post', [:new, @cat, @topic, :post], :class => 'btn btn-default' %>
+    <%= link_to 'Edit Topic', [:edit, @cat, @topic], :class => 'btn btn-default' %>
+</div>
 <div class="well">
     <div class="row">
         <div class="col-lg-3">
@@ -19,9 +20,6 @@
         </div>
     </div>
 </div>
-<ul>
-    <li><%= link_to 'New Post', [:new, @cat, @topic, :post] %>
-</ul>
 <table class="table">
     <% @posts.each do |post| 
         user = User.find(post.user_id) %>

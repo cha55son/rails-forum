@@ -1,21 +1,28 @@
-<%= form_for [@cat, @topic, @post] do |f| %>
-  <% if @post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-      <% @post.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for [@cat, @topic, @post], :html => { :class => 'form-horizontal', :role => "form" } do |f| %>
+    <% if @post.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+            <ul>
+                <% @post.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <div class="form-group">
+        <%= f.label :body, :class => "col-lg-2 control-label" %>
+        <div class="col-lg-10">
+            <%= f.text_area :body, :class => "form-control" %>
+        </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+            <% if params[:action] == 'new' %>
+                <button type="submit" class="btn btn-primary">Create Post</button>
+            <% elsif params[:action] == 'edit' %>
+                <button type="submit" class="btn btn-primary">Edit Post</button>
+            <% end %>
+            <%= link_to "Cancel", [@cat, @topic], :class => "btn btn-default" %>
+        </div>
+    </div>
 <% end %>

@@ -2,9 +2,14 @@
     <li><%= link_to "Categories", categories_path %>
     <li class="active"><%= @cat.title %>
 </ol>
-<% if user_signed_in? %>
-    <%= link_to "New Topic", [:new, @cat, :topic], :class => 'btn btn-default', :style => 'margin-bottom: 20px' %>
-<% end %>
+<div style="margin-bottom: 20px;">
+    <% if user_signed_in? %>
+        <%= link_to "New Topic", [:new, @cat, :topic], :class => 'btn btn-default' %>
+    <% end %>
+    <% if @is_admin %>
+        <%= link_to "Edit Category", [:edit, @cat], :class => 'btn btn-default' %>
+    <% end %>
+</div>
 <table class="table">
     <tr>
         <th></th>
@@ -22,7 +27,7 @@
             %>
             <td><%= index + 1 %></td>
             <td><%= link_to topic.title, [@cat, topic] %></td>
-            <td>0</td>
+            <td><%= Post.where("topic_id = '" + @cat.id.to_s + "'").length %></td>
             <td><%= user.display_name %></td>
             <td><%= topic.created_at %></td>
             <td>
