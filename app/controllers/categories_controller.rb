@@ -1,4 +1,7 @@
 class CategoriesController < ApplicationController
+    skip_before_filter :authenticate_user!, :only => [:index, :show]
+    skip_before_filter :authenticate_admin!, :only => [:index, :show]
+
     def index
         @cats = Category.all
     end

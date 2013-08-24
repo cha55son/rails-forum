@@ -2,29 +2,9 @@
     <li><%= link_to "Categories", categories_path %>
     <li class="active"><%= @cat.title %>
 </ol>
-<h1>Category: <%= @cat.title %></h1>
-<ul>
-    <li><%= link_to "All Categories", categories_path %>
-    <li><%= link_to "Edit Category", edit_category_path %>
-    <li><%= link_to "Delete Category", category_path, method: :delete, data: { confirm: "Are you sure?" } %>
-</ul>
-<dl>
-    <dt>Id</dt>
-        <dd><%= @cat.id %></dd>
-    <dt>Title</dt>
-        <dd><%= @cat.title %></dd>
-    <dt>Description</dt>
-        <dd><%= @cat.description %></dd>
-    <dt>Created</dt>
-        <dd><%= @cat.created_at %></dd>
-    <dt>Updated</dt>
-        <dd><%= @cat.updated_at %></dd>
-</dl>
-
-<h2>Threads</h2>
-<ul>
-    <li><%= link_to "New Thread", [:new, @cat, :topic] %>
-</ul>
+<% if user_signed_in? %>
+    <%= link_to "New Topic", [:new, @cat, :topic], :class => 'btn btn-default', :style => 'margin-bottom: 20px' %>
+<% end %>
 <table class="table">
     <tr>
         <th></th>
@@ -38,6 +18,7 @@
         <tr>
             <%
                 user = User.find(topic.user_id)
+                is_owner = user_signed_in? && current_user.id == user.id
             %>
             <td><%= index + 1 %></td>
             <td><%= link_to topic.title, [@cat, topic] %></td>
@@ -45,8 +26,12 @@
             <td><%= user.display_name %></td>
             <td><%= topic.created_at %></td>
             <td>
-                <%= link_to "Edit", [:edit, @cat, topic] %>
-                <%= link_to "Delete", [@cat, topic], method: :delete, data: { confirm: "Are you sure?" } %>
+                <% if @is_admin or is_owner %>
+                    <%= link_to "Edit", [:edit, @cat, topic], :class => 'btn btn-xs btn-warning' %>
+                <% end %>
+                <% if @is_admin %>
+                    <%= link_to "Delete", [@cat, topic], method: :delete, :class => 'btn btn-xs btn-danger', data: { confirm: "Are you sure?" } %>
+                <% end %>
             </td>
         </tr>
     <% end %>

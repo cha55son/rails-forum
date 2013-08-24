@@ -1,4 +1,4 @@
-<%= form_for @cat do |f| %>
+<%= form_for @cat, :html => { :class => 'form-horizontal', :role => "form" } do |f| %>
     <% if @cat.errors.any? %>
         <div>
             <h2>
@@ -12,15 +12,26 @@
             </ul>
         </div>
     <% end %>
-    <p>
-        <%= f.label :title %><br />
-        <%= f.text_field :title %>
-    </p>
-    <p>
-        <%= f.label :description %><br />
-        <%= f.text_area :description %>
-    </p>
-    <p>
-        <%= f.submit %>
-    </p>
+    <div class="form-group">
+        <%= f.label :title, :class => "col-lg-2 control-label" %>
+        <div class="col-lg-10">
+            <%= f.text_field :title, :class => "form-control", :placeholder => "Title" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :description, :class => "col-lg-2 control-label" %>
+        <div class="col-lg-10">
+            <%= f.text_field :description, :class => "form-control", :placeholder => "Description" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+            <% if params[:action] == 'new' %>
+                <button type="submit" class="btn btn-primary">Create Category</button>
+            <% elsif params[:action] == 'edit' %>
+                <button type="submit" class="btn btn-primary">Edit Category</button>
+            <% end %>
+            <%= link_to "Cancel", categories_path, :class => "btn btn-default" %>
+        </div>
+    </div>
 <% end %>

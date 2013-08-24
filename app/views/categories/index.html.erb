@@ -1,16 +1,18 @@
-<h1>Categories</h1>
-<ul>
-    <% if @is_admin %>
-        <li><%= link_to "New Category", new_category_path %>
-    <% end %>
-</ul>
+<% if @is_admin %>
+    <%= link_to "New Category", new_category_path, :class => 'btn btn-default', :style => 'margin-bottom: 20px' %>
+<% end %>
+<% if flash[:alert] %>
+    <div class="alert alert-warning"><%= flash[:alert] %></div>
+<% end %>
 <table class="table">
     <tr>
         <th></th>
         <th>Title</th>
         <th>Description</th>
         <th>Created</th>
-        <th>Actions</th>
+        <% if @is_admin %>
+            <th>Actions</th>
+        <% end %>
     </tr>
     <% @cats.each_with_index do |cat, index| %>
         <tr>
@@ -18,10 +20,12 @@
             <td><%= link_to cat.title, category_path(cat) %></td>
             <td><%= cat.description %></td>
             <td><%= cat.created_at %></td>
-            <td>
-                <%= link_to "Edit", edit_category_path(cat) %>
-                <%= link_to "Delete", category_path(cat),  method: :delete, data: { confirm: "Are you sure?"  } %>
-            </td>
+            <% if @is_admin %>
+                <td>
+                    <%= link_to "Edit", edit_category_path(cat), :class => 'btn btn-xs btn-warning' %>
+                    <%= link_to "Delete", category_path(cat),  method: :delete, :class => 'btn btn-xs btn-danger', data: { confirm: "Are you sure?" } %>
+                </td>
+            <% end %>
         </tr>
     <% end %>
 </table>
