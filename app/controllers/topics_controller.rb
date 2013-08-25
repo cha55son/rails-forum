@@ -12,7 +12,8 @@ class TopicsController < ApplicationController
     def show
         set_topic
         @user = User.find(@topic.user_id)
-        @posts = Post.all
+        @all_posts = @topic.posts.order('created_at')
+        @posts = @all_posts.page(params[:page]).per(10)
     end
 
     def new
@@ -24,7 +25,7 @@ class TopicsController < ApplicationController
     end
 
     def create
-        @topic = Topic.build(topic_params)
+        @topic = Topic.new(topic_params)
         @topic.user_id = current_user.id
         @topic.category_id = @cat.id
 

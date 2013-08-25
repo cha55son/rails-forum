@@ -6,20 +6,34 @@
 <div class="page-header">
     <h1>Topic: <%= @topic.title %></h1>
 </div>
-<div style="margin-bottom: 20px">
-    <%= link_to 'New Post', [:new, @cat, @topic, :post], :class => 'btn btn-default' %>
-    <%= link_to 'Edit Topic', [:edit, @cat, @topic], :class => 'btn btn-default' %>
-    <% if @is_admin %>
-        <%= link_to "Delete Topic", [@cat, @topic], method: :delete, :data => { :confirm => "Are you sure?" }, :class => 'btn btn-danger pull-right' %>
-    <% end %>
-</div>
+
+<%= render 'actions_block' %>
+
 <%= render 'topic_body' %>
-<table class="table">
-    <% @posts.each do |post| 
-        user = User.find(post.user_id) %>
-        <tr>
-            <td><%= user.display_name %></td>
-            <td><%= post.body %></td>
-        </tr>
-    <% end %>
-</table>
+<% @posts.each do |post| 
+    user = User.find(post.user_id) %>
+    <div class="row">
+        <div class="col-lg-3">
+            <%= link_to user.display_name, user %>
+            <br />
+            <%= post.created_at %>
+        </div>
+        <div class="col-lg-9">
+            <%= post.body %>
+            <% if post.created_at != post.updated_at %>
+                <strong>Edited at <%= post.updated_at %></strong>
+            <% end %>
+            <div class="pull-right">
+                <% if user_signed_in? && (user.id == current_user.id || @is_admin) %>
+                    <%= link_to "Edit", [:edit, @cat, @topic, post], :class => 'btn btn-xs btn-warning' %>
+                <% end %>
+                <% if @is_admin %>
+                    <%= link_to "Delete", [@cat, @topic, post], method: :delete, :data => { :confirm => "Are you sure?" }, :class => 'btn btn-xs btn-danger' %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <hr />
+<% end %>
+
+<%= render 'actions_block' %>

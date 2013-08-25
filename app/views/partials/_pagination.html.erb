@@ -1,0 +1,27 @@
+<%
+    # Required local variables
+    # :all => all_model_records
+    # :some => the_kaminari_active_record_relation
+    #
+    # Optional local variables
+    # :name => model_name (singular name)
+    # :styles => "any css styles here"
+    # :classes => "any classes here"
+    #
+    # ex. Controller
+    # @all_posts = Post.all.order('created_at') (This could be a where statement as well)
+    # @posts = @all_posts.page(params[:page]).per(5)
+    #
+    # ex. View
+    # render 'partials/pagination', :all => @all_posts, :some => @posts, :name => :post
+
+    name ||= 'record'
+    name = pluralize(some.length, name.to_s)
+    name[some.length.to_s + ' '] = ''
+%>
+<div class="pagination-block <%= classes ||= '' %>" style="<%= styles ||= '' %>">
+    <div class="pull-right"><%= paginate some %></div>
+    <div class="pull-right" style="padding-right: 20px; line-height: 34px">
+        Showing <%= some.length == 0 ? 0 : some.values[:offset] + 1 %> - <%= some.length + some.values[:offset] %> of <%= all.length %> <%= name %>
+    </div>
+</div>

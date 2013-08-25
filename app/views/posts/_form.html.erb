@@ -22,7 +22,7 @@
             <% elsif params[:action] == 'edit' %>
                 <button type="submit" class="btn btn-primary">Edit Post</button>
             <% end %>
-            <%= link_to "Cancel", [@cat, @topic], :class => "btn btn-default" %>
+            <%= link_to "Cancel", :back, :class => "btn btn-default" %>
         </div>
     </div>
 <% end %>

@@ -3,14 +3,12 @@
     <li class="active"><%= @cat.title %>
 </ol>
 <div style="margin-bottom: 20px;">
-    <% if user_signed_in? %>
-        <%= link_to "New Topic", [:new, @cat, :topic], :class => 'btn btn-default' %>
-    <% end %>
     <% if @is_admin %>
-        <%= link_to "Edit Category", [:edit, @cat], :class => 'btn btn-default' %>
-        <%= link_to "Delete Category", @cat, method: :delete, :data => { :confirm => "Are you sure?" }, :class => 'btn btn-danger pull-right' %>
     <% end %>
 </div>
+
+<%= render 'show_actions_block' %>
+
 <table class="table">
     <tr>
         <th></th>
@@ -19,7 +17,7 @@
         <th>Owner</th>
         <th>Created</th>
     </tr>
-    <% @cat.topics.each_with_index do |topic, index| %>
+    <% @topics.each_with_index do |topic, index| %>
         <tr>
             <%
                 user = User.find(topic.user_id)
@@ -33,3 +31,5 @@
         </tr>
     <% end %>
 </table>
+
+<%= render 'show_actions_block' %>

@@ -33,14 +33,11 @@ class PostsController < ApplicationController
     end
 
     def update
-        respond_to do |format|
-            if @post.update(post_params)
-                format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-                format.json { head :no_content }
-            else
-                format.html { render action: 'edit' }
-                format.json { render json: @post.errors, status: :unprocessable_entity }
-            end
+        set_post
+        if @post.update(post_params)
+            redirect_to [@cat, @topic], notice: 'Post was successfully updated.'
+        else
+            render action: 'edit'
         end
     end
 
@@ -67,7 +64,7 @@ class PostsController < ApplicationController
         end
 
         # Never trust parameters from the scary internet, only allow the white list through.
-            def post_params
+        def post_params
             params.require(:post).permit(:body)
         end
 end

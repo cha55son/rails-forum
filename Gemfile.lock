@@ -7,6 +7,14 @@ GIT
       railties (>= 3.0)
       sass (>= 3.2)
 
+GIT
+  remote: https://github.com/amatsuda/kaminari.git
+  revision: 01f65e112dd9741921e850473739065a55615b1d
+  specs:
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -132,6 +140,7 @@ DEPENDENCIES
   devise
   jbuilder (~> 1.2)
   jquery-rails
+  kaminari!
   rails (= 4.0.0)
   sass-rails (~> 4.0.0)
   sdoc

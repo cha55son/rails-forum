@@ -21,6 +21,8 @@ class CategoriesController < ApplicationController
 
     def show
         @cat = Category.find(params[:id])
+        @all_topics = @cat.topics.order('created_at')
+        @topics = @all_topics.page(params[:page]).per(2)
     end
 
     def edit

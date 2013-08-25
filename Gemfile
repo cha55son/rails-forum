@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# pagination for rails 4
+gem "kaminari", git: 'https://github.com/amatsuda/kaminari.git'
 gem 'anjlab-bootstrap-rails',   :require => 'bootstrap-rails',
                                 :github => 'anjlab/bootstrap-rails',
                                 :branch => '3.0.0'

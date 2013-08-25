@@ -1,0 +1,12 @@
+<div class="actions-block clearfix">
+    <div class="pull-left" style="margin-bottom: 20px">
+        <%= link_to 'New Post', [:new, @cat, @topic, :post], :class => 'btn btn-default' %>
+        <% if @is_owner || @is_admin %>
+            <%= link_to 'Edit Topic', [:edit, @cat, @topic], :class => 'btn btn-default' %>
+        <% end %>
+        <% if @is_admin %>
+            <%= link_to "Delete Topic", [@cat, @topic], method: :delete, :data => { :confirm => "Are you sure?" }, :class => 'btn btn-danger' %>
+        <% end %>
+    </div>
+    <%= render 'partials/pagination', :all => @all_posts, :some => @posts, :name => :post, :classes => 'pull-right' %>
+</div>
