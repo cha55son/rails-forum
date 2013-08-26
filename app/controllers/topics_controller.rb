@@ -30,7 +30,8 @@ class TopicsController < ApplicationController
         @topic.category_id = @cat.id
 
         if @topic.save
-            redirect_to [@cat, @topic], notice: 'Topic was successfully created.'
+            flash[:success] = "A new topic was created."
+            redirect_to [@cat, @topic]
         else
             render action: 'new'
         end
@@ -39,7 +40,8 @@ class TopicsController < ApplicationController
     def update
         set_topic
         if @topic.update(topic_params)
-            redirect_to [@cat, @topic], notice: 'Topic was successfully updated.'
+            flash[:info] = "The topic was updated."
+            redirect_to [@cat, @topic]
         else
             render action: 'edit'
         end
@@ -48,6 +50,7 @@ class TopicsController < ApplicationController
     def destroy
         set_topic
         @topic.destroy
+        flash[:info] = "The topic was deleted."
         redirect_to @cat
     end
 

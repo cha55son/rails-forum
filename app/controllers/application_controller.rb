@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
     skip_before_filter :authenticate_user!, if: :devise_controller?
     skip_before_filter :authenticate_admin!, if: :devise_controller?
     before_filter :is_admin?
+    before_filter :check_admin_path
 
     protected
         def configure_permitted_parameters
@@ -39,5 +40,11 @@ class ApplicationController < ActionController::Base
                 return true
             end
             return false
+        end
+
+        def check_admin_path
+            action_path = @_action_name
+            first_token = action_path.split('_')[0]
+            @is_admin_path = first_token == 'admin' ? true : false
         end
 end

@@ -1,0 +1,25 @@
+<%
+    # No required parameters to this partial.
+    #
+    # render 'partials/alerts'
+%>
+<%
+    classes = {
+        :alert => 'alert-danger',
+        :notice => 'alert-warning',
+        :info => 'alert-info',
+        :success => 'alert-success'
+    }
+    # Alert will take precendence over notice
+    type = flash[:info] ? :info : nil
+    type = flash[:success] ? :success : type
+    type = flash[:notice] ? :notice : type
+    type = flash[:alert] ? :alert : type
+    if type %>
+
+<div class="alert alert-dismissable <%= classes[type] %>">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <%= flash[type] %> 
+</div>
+
+<% end %>

@@ -1,22 +1,26 @@
 <% if @is_admin %>
     <%= link_to "New Category", new_category_path, :class => 'btn btn-default', :style => 'margin-bottom: 20px' %>
 <% end %>
-<% if flash[:alert] %>
-    <div class="alert alert-warning"><%= flash[:alert] %></div>
-<% end %>
+<%= render 'partials/alerts' %>
 <table class="table">
     <tr>
         <th></th>
         <th>Title</th>
         <th>Description</th>
-        <th>Created</th>
+        <th>Last Activity</th>
     </tr>
     <% @cats.each_with_index do |cat, index| %>
         <tr>
             <td><%= index + 1 %></td>
             <td><%= link_to cat.title, category_path(cat) %></td>
             <td><%= cat.description %></td>
-            <td><%= cat.created_at %></td>
+            <td>
+                <%= time_ago_in_words cat.last_activity_at %>
+                <% if cat.last_activity_user_id 
+                    user = User.find(cat.last_activity_user_id) %>
+                    by <%= link_to user.display_name, user_path(user) %>
+                <% end %>
+            </td>
         </tr>
     <% end %>
 </table>

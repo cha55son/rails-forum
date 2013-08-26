@@ -12,3 +12,19 @@
  *= require_tree .
  */
 @import "twitter/bootstrap";
+
+.page-header {
+    margin-top: 0px;
+
+    h1 {
+        margin-top: 0px;
+    }
+}
+
+.subtle-text {
+    font-size: 12px;
+    font-weight: bold;
+    color: #BBB;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}

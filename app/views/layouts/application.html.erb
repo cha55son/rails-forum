@@ -10,16 +10,20 @@
     <body>
         <nav class="navbar navbar-default" role="navigation">
             <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/">SimpleForum</a>
+                <div class="navbar-header pull-left">
+                    <a class="navbar-brand" href="/">SimpleForum <% if @is_admin_path %>/ Admin<% end %></a>                
                 </div>
                 <% if user_signed_in? %>
                     <div class="btn-group navbar-btn pull-right">
-                        <%= link_to current_user.display_name, edit_user_registration_path, class: 'btn btn-default' %>
+                        <%= link_to current_user.display_name, user_path(current_user), class: 'btn btn-default' %>
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
+                            <% if @is_admin %>
+                                <li><%= link_to "Admin Users", admin_users_path %>
+                            <% end %>
+                            <li><%= link_to "Edit Profile", edit_user_registration_path %>
                             <li><%= link_to "Signout", destroy_user_session_path, :method => :delete %>
                         </ul>
                     </div>
@@ -29,7 +33,6 @@
                         <%= link_to "Register", new_user_registration_path, class: "btn btn-default" %>
                     </div>
                 <% end %>
-                    </ul>
                 </div>
             </div>
         </nav>

@@ -1,25 +1,16 @@
 <%= form_for [@cat, @topic, @post], :html => { :class => 'form-horizontal', :role => "form" } do |f| %>
-    <% if @post.errors.any? %>
-        <div id="error_explanation">
-            <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-            <ul>
-                <% @post.errors.full_messages.each do |msg| %>
-                    <li><%= msg %></li>
-                <% end %>
-            </ul>
-        </div>
-    <% end %>
+    <%= render 'partials/form_errors', :obj => @post, :name => 'post' %>
     <div class="form-group">
-        <%= f.label :body, :class => "col-lg-2 control-label" %>
-        <div class="col-lg-10">
+        <%= f.label :body, :class => "col-lg-2 col-md-2 col-sm-2 control-label" %>
+        <div class="col-lg-10 col-md-10 col-sm-10">
             <%= f.text_area :body, :class => "form-control" %>
         </div>
     </div>
     <div class="form-group">
-        <div class="col-lg-offset-2 col-lg-10">
-            <% if params[:action] == 'new' %>
+        <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-lg-10 col-md-10 col-sm-10">
+            <% if ['new', 'create'].include? params[:action] %>
                 <button type="submit" class="btn btn-primary">Create Post</button>
-            <% elsif params[:action] == 'edit' %>
+            <% elsif ['edit', 'update'].include? params[:action] %>
                 <button type="submit" class="btn btn-primary">Edit Post</button>
             <% end %>
             <%= link_to "Cancel", :back, :class => "btn btn-default" %>

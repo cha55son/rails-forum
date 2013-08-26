@@ -1,3 +1,5 @@
+<%= render 'partials/alerts' %>
+
 <ol class="breadcrumb">
     <li><%= link_to "Categories", categories_path %>
     <li class="active"><%= @cat.title %>
@@ -16,6 +18,7 @@
         <th>Posts</th>
         <th>Owner</th>
         <th>Created</th>
+        <th>Last Activity</th>
     </tr>
     <% @topics.each_with_index do |topic, index| %>
         <tr>
@@ -25,9 +28,17 @@
             %>
             <td><%= index + 1 %></td>
             <td><%= link_to topic.title, [@cat, topic] %></td>
-            <td><%= Post.where("topic_id = ?", @cat.id.to_s).length %></td>
+            <td><%= topic.posts.length %></td>
             <td><%= link_to user.display_name, user_path(user) %></td>
-            <td><%= topic.created_at %></td>
+            <td><%= time_ago_in_words topic.created_at %></td>
+            <td>
+                <%= time_ago_in_words topic.last_activity_at %>
+                <% if topic.last_activity_user_id 
+                    user = User.find(topic.last_activity_user_id) %>
+                    by <%= link_to user.display_name, user_path(user) %>
+                <% end %>
+            </td>
+
         </tr>
     <% end %>
 </table>

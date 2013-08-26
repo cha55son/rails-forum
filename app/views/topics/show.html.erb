@@ -1,39 +1,20 @@
+<%= render 'partials/alerts' %>
+
 <ol class="breadcrumb">
     <li><%= link_to "Categories", categories_path %>
     <li><%= link_to @cat.title, @cat %>
     <li class="active"><%= @topic.title %>
 </ol>
 <div class="page-header">
-    <h1>Topic: <%= @topic.title %></h1>
+    <h1><%= @topic.title %></h1>
 </div>
 
 <%= render 'actions_block' %>
 
-<%= render 'topic_body' %>
-<% @posts.each do |post| 
-    user = User.find(post.user_id) %>
-    <div class="row">
-        <div class="col-lg-3">
-            <%= link_to user.display_name, user %>
-            <br />
-            <%= post.created_at %>
-        </div>
-        <div class="col-lg-9">
-            <%= post.body %>
-            <% if post.created_at != post.updated_at %>
-                <strong>Edited at <%= post.updated_at %></strong>
-            <% end %>
-            <div class="pull-right">
-                <% if user_signed_in? && (user.id == current_user.id || @is_admin) %>
-                    <%= link_to "Edit", [:edit, @cat, @topic, post], :class => 'btn btn-xs btn-warning' %>
-                <% end %>
-                <% if @is_admin %>
-                    <%= link_to "Delete", [@cat, @topic, post], method: :delete, :data => { :confirm => "Are you sure?" }, :class => 'btn btn-xs btn-danger' %>
-                <% end %>
-            </div>
-        </div>
-    </div>
-    <hr />
+<%= render 'posts/post', :post => @topic, :topic => true %>
+
+<% @posts.each do |post| %>
+    <%= render 'posts/post', :post => post %>
 <% end %>
 
 <%= render 'actions_block' %>

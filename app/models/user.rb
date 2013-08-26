@@ -7,8 +7,9 @@ class User < ActiveRecord::Base
 
     validates :display_name, presence: true, length: { minimum: 5 }, uniqueness: { :scope => :display_name }
 
+    # Don't want to remove topics other users have posted on
     has_many :topics
-    has_many :posts
+    has_many :posts, :dependent => :destroy
 
     before_save :check_admin
 

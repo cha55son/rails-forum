@@ -1,34 +1,22 @@
 <%= form_for @cat, :html => { :class => 'form-horizontal', :role => "form" } do |f| %>
-    <% if @cat.errors.any? %>
-        <div>
-            <h2>
-                <%= pluralize(@cat.errors.count, "error") %> prohibited
-                this category from being saved.
-            </h2>
-            <ul>
-                <% @cat.errors.full_messages.each do |msg| %>
-                    <li><%= msg %>
-                <% end %>
-            </ul>
-        </div>
-    <% end %>
+    <%= render 'partials/form_errors', :obj => @cat, :name => :category %>
     <div class="form-group">
-        <%= f.label :title, :class => "col-lg-2 control-label" %>
-        <div class="col-lg-10">
+        <%= f.label :title, :class => "col-lg-2 col-md-2 col-sm-2 control-label" %>
+        <div class="col-lg-10 col-md-10 col-sm-10">
             <%= f.text_field :title, :class => "form-control", :placeholder => "Title" %>
         </div>
     </div>
     <div class="form-group">
-        <%= f.label :description, :class => "col-lg-2 control-label" %>
-        <div class="col-lg-10">
+        <%= f.label :description, :class => "col-lg-2 col-md-2 col-sm-2 control-label" %>
+        <div class="col-lg-10 col-md-10 col-sm-10">
             <%= f.text_area :description, :class => "form-control", :placeholder => "Description" %>
         </div>
     </div>
     <div class="form-group">
-        <div class="col-lg-offset-2 col-lg-10">
-            <% if params[:action] == 'new' %>
+        <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-lg-10 col-md-10 col-sm-10">
+            <% if ['new', 'create'].include? params[:action] %>
                 <button type="submit" class="btn btn-primary">Create Category</button>
-            <% elsif params[:action] == 'edit' %>
+            <% elsif ['edit', 'update'].include? params[:action] %>
                 <button type="submit" class="btn btn-primary">Edit Category</button>
             <% end %>
             <%= link_to "Cancel", :back, :class => "btn btn-default" %>

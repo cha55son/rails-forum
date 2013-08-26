@@ -1,0 +1,31 @@
+<%
+    user = User.find(post.user_id)
+    is_topic = defined?(topic) && topic == true
+%>
+<div class="panel panel-default <%= is_topic ? 'topic' : '' %>">
+    <div class="panel-heading">
+        <%= link_to user.display_name, user %> <small><%= time_ago_in_words post.created_at %></small>
+        <% if is_topic %>
+            <span class="subtle-text pull-right">Original Post</span>
+        <% else %>
+            <div class="pull-right">
+                <% if user_signed_in? && (user.id == current_user.id || @is_admin) %>
+                    <%= link_to "Edit", [:edit, @cat, @topic, post], :class => 'btn btn-xs btn-warning' %>
+                <% end %>
+                <% if @is_admin %>
+                    <%= link_to "Delete", [@cat, @topic, post], method: :delete, :data => { :confirm => "Are you sure?" }, :class => 'btn btn-xs btn-danger' %>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+    <div class="panel-body">
+        <%= post.body %>
+        <% if post.created_at != post.updated_at %>
+            <br />
+            <strong>Edited at <%= time_ago_in_words post.updated_at %></strong>
+        <% end %>
+    </div>
+</div>
+<% if is_topic %>
+    <hr />
+<% end %>

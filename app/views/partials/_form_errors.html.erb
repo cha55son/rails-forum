@@ -1,0 +1,20 @@
+<%
+    # Required parameters
+    # :obj => collection_of_objects
+    # :name => model_name_of_objects
+    #
+    # render 'partials/form_errors', :obj => @cat, :name => :category
+%>
+<% if obj.errors.any? %>
+    <div class="alert alert-danger">
+        <strong>
+            <%= pluralize(obj.errors.count, "error") %> prohibited
+            this <%= name %> from being saved.
+        </strong>
+        <ul>
+            <% obj.errors.full_messages.each do |msg| %>
+                <li><%= msg %>
+            <% end %>
+        </ul>
+    </div>
+<% end %>

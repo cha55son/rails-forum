@@ -16,12 +16,11 @@
     # render 'partials/pagination', :all => @all_posts, :some => @posts, :name => :post
 
     name ||= 'record'
-    name = pluralize(some.length, name.to_s)
-    name[some.length.to_s + ' '] = ''
+    name = pluralize(all.length, name.to_s)
 %>
 <div class="pagination-block <%= classes ||= '' %>" style="<%= styles ||= '' %>">
     <div class="pull-right"><%= paginate some %></div>
     <div class="pull-right" style="padding-right: 20px; line-height: 34px">
-        Showing <%= some.length == 0 ? 0 : some.values[:offset] + 1 %> - <%= some.length + some.values[:offset] %> of <%= all.length %> <%= name %>
+        Showing <%= some.length == 0 ? 0 : some.values[:offset] + 1 %> - <%= some.length + some.values[:offset] %> of <%= name %>
     </div>
 </div>

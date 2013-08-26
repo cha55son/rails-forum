@@ -1,0 +1,55 @@
+<%= render 'partials/alerts' %>
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#admin-users" data-toggle="tab">Admin Users</a></li>
+    <li><a href="#standard-users" data-toggle="tab">Standard Users</a></li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane active" id="admin-users">
+        <br />
+        <table class="table">
+            <tr>
+                <th>Display Name</th>
+                <th>Email</th>
+                <th>Signed Up</th>
+                <th>Actions</th>
+            </tr>
+            <% @all_admin_users.each do |user| %>
+                <tr>
+                    <td><%= link_to user.display_name, user_path(user) %></td>
+                    <td><%= user.email %></td>
+                    <td><%= time_ago_in_words user.created_at %></td>
+                    <td>    
+                        <%= link_to "Demote", admin_user_path(user, 'demote'), method: :put, 
+                            :data => { :confirm => "Are you sure?" }, :class => 'btn btn-xs btn-warning' %>
+                        <%= link_to "Delete", user_path(user), method: :delete, 
+                            :data => { :confirm => "Are you sure?" }, :class => 'btn btn-xs btn-danger' %>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+    </div>
+    <div class="tab-pane" id="standard-users">
+        <%= render 'partials/pagination', :all => @all_non_admin_users, :some => @non_admin_users, :name => :user %>
+        <table class="table">
+            <tr>
+                <th>Display Name</th>
+                <th>Email</th>
+                <th>Signed Up</th>
+                <th>Actions</th>
+            </tr>
+            <% @non_admin_users.each do |user| %>
+                <tr>
+                    <td><%= link_to user.display_name, user_path(user) %></td>
+                    <td><%= user.email %></td>
+                    <td><%= time_ago_in_words user.created_at %></td>
+                    <td>    
+                        <%= link_to "Promote", admin_user_path(user, 'promote'), method: :put, 
+                            :data => { :confirm => "Are you sure?" }, :class => 'btn btn-xs btn-default' %>
+                        <%= link_to "Delete", user_path(user), method: :delete, :data => { :confirm => "Are you sure?" }, :class => 'btn btn-xs btn-danger' %>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+        <%= render 'partials/pagination', :all => @all_non_admin_users, :some => @non_admin_users, :name => :user %>
+    </div>
+</div>

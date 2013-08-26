@@ -1,6 +1,11 @@
 SimpleForum::Application.routes.draw do
   resources :posts
 
+    scope "/admin" do
+        get 'users', to: 'users#admin_index', as: :admin_users
+        put 'users/:id/:type', to: 'users#admin_edit', as: :admin_user
+    end
+
     devise_for :users, :controllers => { :registrations => :registrations, :confirmations => :confirmations }
     get 'user/:id', to: 'users#show', as: 'user'
 
