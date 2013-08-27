@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
     skip_before_filter :authenticate_user!
-    skip_before_filter :authenticate_admin!, if: @is_admin_path
-    before_filter :set_controller
+    skip_before_filter :authenticate_admin!, only: [:show]
 
     def admin_index
         @all_admin_users = User.where(:admin => true)
@@ -35,9 +34,4 @@ class UsersController < ApplicationController
         @mixed = (@all_topics + @all_posts).sort_by(&:created_at).reverse
         @page_results = Kaminari.paginate_array(@mixed).page(params[:page]).per(10)
     end
-
-    private 
-        def set_controller
-            @controller = self
-        end
 end

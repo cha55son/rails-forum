@@ -12,6 +12,7 @@ class CategoriesController < ApplicationController
 
     def create
         @cat = Category.new(category_permit)
+        @cat.last_activity_at = Time.now
         if @cat.save
             flash[:success] = "A new category was created."
             redirect_to @cat
@@ -22,7 +23,7 @@ class CategoriesController < ApplicationController
 
     def show
         @cat = Category.find(params[:id])
-        @all_topics = @cat.topics.order('created_at')
+        @all_topics = @cat.topics.order('created_at desc').order('last_activity_at desc')
         @topics = @all_topics.page(params[:page]).per(10)
     end
 

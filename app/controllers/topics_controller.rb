@@ -28,6 +28,7 @@ class TopicsController < ApplicationController
         @topic = Topic.new(topic_params)
         @topic.user_id = current_user.id
         @topic.category_id = @cat.id
+        @topic.last_activity_at = Time.now
 
         if @topic.save
             flash[:success] = "A new topic was created."

@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-SimpleForum::Application.config.secret_key_base = '9f974ed9241f3824242c3fb6f75b5af389812c77756d7359ce45651a5afde7ae93a7671093a5c619aa62591c92e1bc0265b4b2e97716ec966eb34e9faf707449'
+RailsForum::Application.config.secret_key_base = '9f974ed9241f3824242c3fb6f75b5af389812c77756d7359ce45651a5afde7ae93a7671093a5c619aa62591c92e1bc0265b4b2e97716ec966eb34e9faf707449'

@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-SimpleForum::Application.load_tasks
+RailsForum::Application.load_tasks

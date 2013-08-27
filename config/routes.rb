@@ -1,4 +1,4 @@
-SimpleForum::Application.routes.draw do
+RailsForum::Application.routes.draw do
   resources :posts
 
     scope "/admin" do

@@ -1,4 +1,4 @@
-SimpleForum::Application.configure do
+RailsForum::Application.configure do
     config.log_level = :debug
     config.action_mailer.default_url_options = { :host => 'localhost:3002' }
     config.action_mailer.delivery_method = :smtp

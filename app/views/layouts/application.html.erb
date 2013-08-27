@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>SimpleForum</title>
+        <title>RailsForum</title>
         <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
         <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
         <%= csrf_meta_tags %>
@@ -11,7 +11,7 @@
         <nav class="navbar navbar-default" role="navigation">
             <div class="container">
                 <div class="navbar-header pull-left">
-                    <a class="navbar-brand" href="/">SimpleForum <% if @is_admin_path %>/ Admin<% end %></a>                
+                    <a class="navbar-brand" href="/">RailsForum <% if @is_admin_path %>/ Admin<% end %></a>                
                 </div>
                 <% if user_signed_in? %>
                     <div class="btn-group navbar-btn pull-right">

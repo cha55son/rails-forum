@@ -1,12 +1,19 @@
+<%= render 'partials/alerts' %>
+
+<ol class="breadcrumb">
+    <li class="active">Categories
+</ol>
+
 <% if @is_admin %>
     <%= link_to "New Category", new_category_path, :class => 'btn btn-default', :style => 'margin-bottom: 20px' %>
 <% end %>
-<%= render 'partials/alerts' %>
+
 <table class="table">
     <tr>
         <th></th>
         <th>Title</th>
         <th>Description</th>
+        <th>Topics</th>
         <th>Last Activity</th>
     </tr>
     <% @cats.each_with_index do |cat, index| %>
@@ -14,10 +21,11 @@
             <td><%= index + 1 %></td>
             <td><%= link_to cat.title, category_path(cat) %></td>
             <td><%= cat.description %></td>
+            <td><%= cat.topics.count %></td>
             <td>
                 <%= time_ago_in_words cat.last_activity_at %>
                 <% if cat.last_activity_user_id 
-                    user = User.find(cat.last_activity_user_id) %>
+                    user = User.find(cat.last_activity_user_id) %> ago
                     by <%= link_to user.display_name, user_path(user) %>
                 <% end %>
             </td>
