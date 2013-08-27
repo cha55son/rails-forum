@@ -23,7 +23,7 @@
                             <% if @is_admin %>
                                 <li><%= link_to "Admin Users", admin_users_path %>
                             <% end %>
-                            <li><%= link_to "Edit Profile", edit_user_registration_path %>
+                            <li><%= link_to "Edit Account", edit_user_registration_path %>
                             <li><%= link_to "Signout", destroy_user_session_path, :method => :delete %>
                         </ul>
                     </div>

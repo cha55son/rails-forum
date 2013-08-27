@@ -4,10 +4,13 @@
     #
 
     user = post.user
+    topic = post.topic
 %>
-<div class="panel panel-default post-block">
+<div class="panel panel-default user-post-block">
     <div class="panel-heading">
-        <%= link_to user.display_name, user %> <small><%= time_ago_in_words post.created_at %> ago</small>
+        <%= link_to topic.title, [topic.category, topic] %> |
+        <%= user.display_name %> <small><%= time_ago_in_words post.created_at %> ago</small>
+        <span class="subtle-text pull-right">Post</span>
     </div>
     <div class="panel-body">
         <%= post.body %>

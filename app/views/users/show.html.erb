@@ -1,1 +1,46 @@
-HI there
+<style>
+    .stat-table th {
+        text-align: right;
+    }
+</style>
+
+<div class="page-header">
+    <h1><%= @user.display_name %></h1>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <table class="table stat-table">
+            <tr>
+                <th>Joined</th>
+                <td><%= time_ago_in_words @user.created_at %> ago</td>
+            </tr>
+            <tr>
+                <th>Topics Created</th>
+                <td><%= @all_topics.length %></td>
+            </tr>
+            <tr>
+                <th>Posts Created</th>
+                <td><%= @all_posts.length %></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<hr />
+<%= render 'partials/pagination', :all => (@all_topics + @all_posts), :some => @page_results, 
+    :name => :result, :per => 10, :classes => 'clearfix' %>
+<div class="results">
+    <% @page_results.each do |result| 
+        if defined?(result.title) %>
+            <a href="<%= url_for(result.category) %>">
+                <%= render('topic_block', :topic => result) %>
+            </a>
+        <% else 
+            topic = result.topic %>
+            <a href="<%= url_for [topic.category, topic] %>">
+                <%= render('post_block', :post => result) %>
+            </a>
+        <% end %>
+    <% end %>
+</div>
+<%= render 'partials/pagination', :all => (@all_topics + @all_posts), :some => @page_results, 
+    :name => :result, :per => 10 %>

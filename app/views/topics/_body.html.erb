@@ -1,0 +1,20 @@
+<%
+    # Required parameters
+    # :topic => a_topic_record
+    #
+
+    user = topic.user
+%>
+<div class="panel panel-default topic-block">
+    <div class="panel-heading">
+        <%= link_to user.display_name, user %> <small><%= time_ago_in_words topic.created_at %> ago</small>
+        <span class="subtle-text pull-right">Original Post</span>
+    </div>
+    <div class="panel-body">
+        <%= topic.body %>
+        <% if topic.created_at != topic.updated_at %>
+            <br />
+            <strong>Edited <%= time_ago_in_words topic.updated_at %> ago</strong>
+        <% end %>
+    </div>
+</div>

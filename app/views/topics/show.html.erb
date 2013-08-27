@@ -11,7 +11,7 @@
 
 <%= render 'actions_block' %>
 
-<%= render 'posts/post', :post => @topic, :topic => true %>
+<%= render 'topics/body', :topic => @topic %>
 
 <% @posts.each do |post| %>
     <%= render 'posts/post', :post => post %>

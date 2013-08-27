@@ -7,6 +7,7 @@
     # :name => model_name (singular name)
     # :styles => "any css styles here"
     # :classes => "any classes here"
+    # :per => per_amount (useful if combining arrays and offset is unknown)
     #
     # ex. Controller
     # @all_posts = Post.all.order('created_at') (This could be a where statement as well)
@@ -17,10 +18,12 @@
 
     name ||= 'record'
     name = pluralize(all.length, name.to_s)
+    offset = (defined?(some.values) && some.values[:offset]) || (params[:page].to_i * per.to_i)
+    length = some.length
 %>
 <div class="pagination-block <%= classes ||= '' %>" style="<%= styles ||= '' %>">
     <div class="pull-right"><%= paginate some %></div>
     <div class="pull-right" style="padding-right: 20px; line-height: 34px">
-        Showing <%= some.length == 0 ? 0 : some.values[:offset] + 1 %> - <%= some.length + some.values[:offset] %> of <%= name %>
+        Showing <%= length == 0 ? 0 : offset + 1 %> - <%= length + offset %> of <%= name %>
     </div>
 </div>

@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# Cool debugging
+gem 'awesome_print', :require => 'ap', group: [:development]
 # pagination for rails 4
 gem "kaminari", git: 'https://github.com/amatsuda/kaminari.git'
 gem 'anjlab-bootstrap-rails',   :require => 'bootstrap-rails',

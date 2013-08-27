@@ -28,3 +28,16 @@
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+
+.topic-block {
+    
+    .panel-heading {
+        background-color: lighten(#474D57, 10%); 
+        color: #EEE;
+
+        a {
+            color: #EEE;
+            text-decoration: underline;
+        }
+    }
+}

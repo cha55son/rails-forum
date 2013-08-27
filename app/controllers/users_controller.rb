@@ -29,6 +29,11 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find(params[:id])
+
+        @all_topics = Topic.where(:user_id => @user.id)
+        @all_posts = Post.where(:user_id => @user.id)
+        @mixed = (@all_topics + @all_posts).sort_by(&:created_at).reverse
+        @page_results = Kaminari.paginate_array(@mixed).page(params[:page]).per(10)
     end
 
     private 

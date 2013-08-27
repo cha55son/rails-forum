@@ -44,6 +44,7 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.0)
     atomic (1.1.13)
+    awesome_print (1.1.0)
     bcrypt-ruby (3.1.1)
     builder (3.1.4)
     coffee-rails (4.0.0)
@@ -62,6 +63,7 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     hike (1.2.3)
+    htmlentities (4.3.1)
     i18n (0.6.5)
     jbuilder (1.5.0)
       activesupport (>= 3.0.0)
@@ -136,8 +138,10 @@ PLATFORMS
 
 DEPENDENCIES
   anjlab-bootstrap-rails!
+  awesome_print
   coffee-rails (~> 4.0.0)
   devise
+  htmlentities
   jbuilder (~> 1.2)
   jquery-rails
   kaminari!
