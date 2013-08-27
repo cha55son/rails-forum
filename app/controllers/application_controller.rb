@@ -23,16 +23,6 @@ class ApplicationController < ActionController::Base
             end
         end
 
-        # Must be logged in to continue
-        def require_login(msg = nil)
-            if !user_signed_in?
-                flash.alert = msg or "An error occurred, try to login before continuing."
-                redirect_to new_user_session_path 
-                return false
-            end
-            return true
-        end
-
         def is_admin?
             @is_admin = false
             if user_signed_in? and current_user.admin == true
