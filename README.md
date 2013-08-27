@@ -3,7 +3,7 @@ README
 
 __rails-forum__ is a basic forum app I created to learn about Ruby on Rails. Hopefully others could use this as a starting place for a forum application.
 
-### Tested With
+### Developed On
 
 * __Ruby__: 2.0.0
 * __Rails__: 4.0
