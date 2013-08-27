@@ -39,6 +39,8 @@ Update the `development.rb` file to reflect the host and mail credentials for yo
 Now run the following command to start the server
 
         rails server # Starts on port 3000 use -p to change the port.
+        
+You may now connect to the site by visiting [http://localhost:3000](http://localhost:3000)
 
 The first user to sign up on the site will be given __admin__ privileges and will be able to __promote__ other users to admin status.
 
