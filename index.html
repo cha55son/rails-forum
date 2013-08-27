@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Rails-forum by cha55son</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Rails-forum</h1>
+        <h2>A basic forum built with Ruby on Rails and Bootstrap.</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/cha55son/rails-forum/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/cha55son/rails-forum/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/cha55son/rails-forum" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a name="readme" class="anchor" href="#readme"><span class="octicon octicon-link"></span></a>README</h1>
+
+<p><strong>rails-forum</strong> is a basic forum app I created to learn about Ruby on Rails. Hopefully others could use this as a starting place for a forum application.</p>
+
+<h3>
+<a name="developed-on" class="anchor" href="#developed-on"><span class="octicon octicon-link"></span></a>Developed On</h3>
+
+<ul>
+<li>
+<strong>Ruby</strong>: 2.0.0</li>
+<li>
+<strong>Rails</strong>: 4.0</li>
+<li>
+<strong>OS</strong>: Centos 5/6, Mac OSX 10.8.4</li>
+</ul><h3>
+<a name="required-gems" class="anchor" href="#required-gems"><span class="octicon octicon-link"></span></a>Required Gems</h3>
+
+<ul>
+<li>
+<a href="https://github.com/plataformatec/devise">Devise</a> (User management)</li>
+<li><a href="http://getbootstrap.com">Bootstrap 3.0</a></li>
+<li>
+<a href="https://github.com/amatsuda/kaminari">Kaminari</a> (Pagination)</li>
+</ul><h3>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h3>
+
+<p>First you need to clone the project into place.</p>
+
+<pre><code>    git clone git@github.com:cha55son/rails-forum.git
+</code></pre>
+
+<p>Next use bundle to pull in all the required gems</p>
+
+<pre><code>    bundle install
+</code></pre>
+
+<p>Now you need to setup the database</p>
+
+<pre><code>    rake db:setup
+    rake db:migrate
+</code></pre>
+
+<p>Be sure to copy the <code>development.rb.example</code> to <code>development.rb</code></p>
+
+<pre><code>    cp environments/development.rb.example environments/development.rb
+    vim environments/development.rb
+</code></pre>
+
+<p>Update the <code>development.rb</code> file to reflect the host and mail credentials for your site.
+Now run the following command to start the server</p>
+
+<pre><code>    rails server # Starts on port 3000 use -p to change the port.
+</code></pre>
+
+<p>You may now connect to the site by visiting <a href="http://localhost:3000">http://localhost:3000</a></p>
+
+<p>The first user to sign up on the site will be given <strong>admin</strong> privileges and will be able to <strong>promote</strong> other users to admin status.</p>
+
+<h4>
+<a name="thats-all-there-is-to-it-thanks-for-reading" class="anchor" href="#thats-all-there-is-to-it-thanks-for-reading"><span class="octicon octicon-link"></span></a>Thats all there is to it. Thanks for reading.</h4>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
